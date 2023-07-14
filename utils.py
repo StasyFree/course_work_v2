@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 def read_file(file):
@@ -19,3 +20,17 @@ def get_filtered_data(data):
 def get_sorted_data(data):
     data = sorted(data, key=lambda x: x['date'], reverse=True)
     return data[:5]
+
+
+def mask(data):
+    new_data = data.split()
+    if len(new_data[1]) == 20:
+        new_data[1] = 2 * '*' + new_data[1][-4:]
+        return ' '.join(new_data)
+    else:
+        card = new_data[-1]
+        new_data[-1] = card[:4] + ' ' + card[4:6] + 2 * '*' + ' ' + 4 * '*' + ' ' + card[-4:]
+        return ' '.join(new_data)
+
+
+
