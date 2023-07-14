@@ -14,3 +14,8 @@ def get_filtered_data(data):
             if item["state"] == 'EXECUTED':
                 new_data.append(item)
     return new_data
+
+
+def get_sorted_data(data):
+    data = sorted(data, key=lambda x: x['date'], reverse=True)
+    return data[:5]
