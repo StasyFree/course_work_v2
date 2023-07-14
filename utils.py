@@ -22,7 +22,7 @@ def get_sorted_data(data):
     return data[:5]
 
 
-def mask(data):
+def put_on_mask(data):
     new_data = data.split()
     if len(new_data[1]) == 20:
         new_data[1] = 2 * '*' + new_data[1][-4:]
@@ -36,14 +36,14 @@ def mask(data):
 def get_formatted(data):
     operations = []
     for item in data:
-        recipient = mask(item['to'])
+        recipient = put_on_mask(item['to'])
         item['date'] = datetime.datetime.strptime(item['date'], "%Y-%m-%dT%H:%M:%S.%f")
         date = datetime.datetime.strftime(item['date'], "%d.%m.%Y")
         amount = item["operationAmount"]["amount"]
         currency = item["operationAmount"]["currency"]["name"]
         description = item['description']
         if 'from' in item.keys():
-            destination = mask(item['from'])
+            destination = put_on_mask(item['from'])
             operation = f"{date} {description} \n{destination} -> {recipient}\n{amount} {currency}\n"
             operations.append(operation)
         else:
