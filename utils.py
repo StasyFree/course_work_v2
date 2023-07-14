@@ -34,6 +34,7 @@ def mask(data):
 
 
 def get_formatted(data):
+    operations = []
     for item in data:
         recipient = mask(item['to'])
         item['date'] = datetime.datetime.strptime(item['date'], "%Y-%m-%dT%H:%M:%S.%f")
@@ -44,7 +45,8 @@ def get_formatted(data):
         if 'from' in item.keys():
             destination = mask(item['from'])
             operation = f"{date} {description} \n{destination} -> {recipient}\n{amount} {currency}\n"
-            print(operation)
+            operations.append(operation)
         else:
             operation = f"{date} {description} \n -> {recipient}\n{amount} {currency}\n"
-            print(operation)
+            operations.append(operation)
+    return operations
